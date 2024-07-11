@@ -1,7 +1,9 @@
-package com.rocketseat.planner.model.activity;
+package com.rocketseat.planner.service;
 
-import com.rocketseat.planner.model.participant.Participant;
-import com.rocketseat.planner.model.participant.ParticipantData;
+import com.rocketseat.planner.dto.activity.ActivityData;
+import com.rocketseat.planner.dto.activity.ActivityRequestPayload;
+import com.rocketseat.planner.dto.activity.ActivityResponse;
+import com.rocketseat.planner.model.activity.Activity;
 import com.rocketseat.planner.model.trip.Trip;
 import com.rocketseat.planner.repositories.ActivityRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.rocketseat.planner.model.link;
+package com.rocketseat.planner.dto.link;
 
 import java.util.UUID;
 

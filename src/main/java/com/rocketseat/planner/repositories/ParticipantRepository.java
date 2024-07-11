@@ -1,6 +1,7 @@
 package com.rocketseat.planner.repositories;
 
 
+import com.rocketseat.planner.dto.participant.ParticipantCreateResponse;
 import com.rocketseat.planner.model.participant.Participant;
 import org.springframework.data.jpa.repository.JpaRepository;
 

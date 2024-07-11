@@ -1,15 +1,13 @@
 package com.rocketseat.planner.controller;
 
 import com.rocketseat.planner.model.participant.Participant;
-import com.rocketseat.planner.model.participant.ParticipantRequestPayload;
-import com.rocketseat.planner.model.trip.Trip;
+import com.rocketseat.planner.dto.participant.ParticipantRequestPayload;
 import com.rocketseat.planner.repositories.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import java.util.ArrayList;
 import java.util.Optional;
 import java.util.UUID;
 

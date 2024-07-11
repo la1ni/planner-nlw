@@ -1,4 +1,4 @@
-package com.rocketseat.planner.model.trip;
+package com.rocketseat.planner.dto.trip;
 
 import java.util.List;
 

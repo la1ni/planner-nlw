@@ -1,5 +1,8 @@
-package com.rocketseat.planner.model.participant;
+package com.rocketseat.planner.service;
 
+import com.rocketseat.planner.dto.participant.ParticipantCreateResponse;
+import com.rocketseat.planner.dto.participant.ParticipantData;
+import com.rocketseat.planner.model.participant.Participant;
 import com.rocketseat.planner.model.trip.Trip;
 import com.rocketseat.planner.repositories.ParticipantRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +20,7 @@ public class ParticipantService {
     public void registerParticipantsToEvent(List<String> participantsToInvite, Trip trip){
         List<Participant> participants = participantsToInvite.stream().map(email -> new Participant(email, trip)).toList();
         this.participantRepository.saveAll(participants);
-        System.out.println(participants.get(0).getId());
+
     }
 
     public ParticipantCreateResponse registerParticipantToEvent(String email, Trip trip) {

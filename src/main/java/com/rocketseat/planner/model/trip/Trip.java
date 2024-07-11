@@ -1,6 +1,6 @@
 package com.rocketseat.planner.model.trip;
 
-import jakarta.annotation.Nullable;
+import com.rocketseat.planner.dto.trip.TripRequestPayload;
 import jakarta.persistence.*;
 import lombok.*;
 
