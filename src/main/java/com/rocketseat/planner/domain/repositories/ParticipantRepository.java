@@ -1,8 +1,7 @@
-package com.rocketseat.planner.repositories;
+package com.rocketseat.planner.domain.repositories;
 
 
-import com.rocketseat.planner.dto.participant.ParticipantCreateResponse;
-import com.rocketseat.planner.model.participant.Participant;
+import com.rocketseat.planner.domain.model.participant.Participant;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -8,17 +8,13 @@ import com.rocketseat.planner.dto.participant.ParticipantCreateResponse;
 import com.rocketseat.planner.dto.participant.ParticipantRequestPayload;
 import com.rocketseat.planner.dto.trip.TripCreateResponse;
 import com.rocketseat.planner.dto.trip.TripRequestPayload;
-import com.rocketseat.planner.exception.ResourceNotFoundException;
-import com.rocketseat.planner.model.trip.Trip;
-import com.rocketseat.planner.repositories.TripRepository;
+import com.rocketseat.planner.exceptions.InvalidDatesException;
+import com.rocketseat.planner.exceptions.TripNotFoundException;
+import com.rocketseat.planner.domain.model.trip.Trip;
+import com.rocketseat.planner.domain.repositories.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import java.lang.module.ResolutionException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
@@ -39,21 +35,29 @@ public class TripService {
     @Autowired
     private LinkService linkService;
 
-    // função auxiliar da classe
-    public Trip verifyIfTripExists(UUID id) {
+    // função auxiliar da classe (verifica se viagem existe e a retorna, além ser capaz de retornar exceção se necessárop)
+    private Trip verifyIfTripExists(UUID id) {
         Optional<Trip> trip = this.tripRepository.findById(id);
         if (trip.isPresent()) {
             return trip.get();
         } else {
-            throw new ResourceNotFoundException("Viagem não encontrada");
+            throw new TripNotFoundException();
         }
+    }
+
+    // função auxiliar da classe (verifica se as datas são válidas)
+    private boolean validateDate(Trip trip){
+        return !trip.getStartsAt().isAfter(trip.getEndsAt());
     }
 
     public TripCreateResponse createTrip(TripRequestPayload payload) {
         Trip newTrip = new Trip(payload);
-        this.tripRepository.save(newTrip);
-        this.participantService.registerParticipantsToEvent(payload.emails_to_invite(), newTrip);
-        return new TripCreateResponse(newTrip.getId());
+        if (validateDate(newTrip)) {
+            this.tripRepository.save(newTrip);
+            this.participantService.registerParticipantsToEvent(payload.emails_to_invite(), newTrip);
+            return new TripCreateResponse(newTrip.getId());
+        }
+        else throw new InvalidDatesException();
     }
 
     public Trip getTrip(UUID id) {
@@ -75,8 +79,13 @@ public class TripService {
         rawTrip.setDestination(payload.destination());
         rawTrip.setEndsAt(LocalDateTime.parse(payload.ends_at(), DateTimeFormatter.ISO_DATE_TIME));
         rawTrip.setStartsAt(LocalDateTime.parse(payload.starts_at(), DateTimeFormatter.ISO_DATE_TIME));
-        this.tripRepository.save(rawTrip);
-        return rawTrip;
+
+        if (validateDate(rawTrip)) {
+            this.tripRepository.save(rawTrip);
+            return rawTrip;
+        }
+
+        else throw new InvalidDatesException();
     }
 
     public ParticipantCreateResponse inviteParticipant(UUID id, ParticipantRequestPayload payload){

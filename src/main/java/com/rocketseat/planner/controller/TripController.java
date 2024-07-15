@@ -12,8 +12,8 @@ import com.rocketseat.planner.dto.participant.ParticipantRequestPayload;
 import com.rocketseat.planner.dto.trip.TripCreateResponse;
 import com.rocketseat.planner.dto.trip.TripRequestPayload;
 import com.rocketseat.planner.service.ActivityService;
-import com.rocketseat.planner.model.trip.Trip;
-import com.rocketseat.planner.repositories.TripRepository;
+import com.rocketseat.planner.domain.model.trip.Trip;
+import com.rocketseat.planner.domain.repositories.TripRepository;
 import com.rocketseat.planner.service.LinkService;
 import com.rocketseat.planner.service.ParticipantService;
 import com.rocketseat.planner.service.TripService;
@@ -21,10 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController

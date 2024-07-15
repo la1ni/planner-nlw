@@ -1,6 +1,6 @@
-package com.rocketseat.planner.repositories;
+package com.rocketseat.planner.domain.repositories;
 
-import com.rocketseat.planner.model.activity.Activity;
+import com.rocketseat.planner.domain.model.activity.Activity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

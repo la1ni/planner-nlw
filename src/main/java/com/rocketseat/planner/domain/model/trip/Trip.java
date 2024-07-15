@@ -1,4 +1,4 @@
-package com.rocketseat.planner.model.trip;
+package com.rocketseat.planner.domain.model.trip;
 
 import com.rocketseat.planner.dto.trip.TripRequestPayload;
 import jakarta.persistence.*;
